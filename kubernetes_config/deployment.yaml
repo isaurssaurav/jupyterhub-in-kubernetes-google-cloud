@@ -26,18 +26,18 @@ spec:
           env: 
             - 
               name: AUTH0_SUBDOMAIN
-              value: #subdomain_AUTH0
+              value: #sub-domain
             - 
               name: OAUTH_CLIENT_ID
-              value: #client_id_AUTH0
+              value: #client-id
             - 
               name: OAUTH_CLIENT_SECRET
-              value: #client_secret_AUTH0
+              value: #client-secret
             - 
               name: OAUTH_CALLBACK_URL
-              value: #callback_url_AUTH0
-          image: "jupyterhub/jupyterhub:latest"
-          imagePullPolicy: Never
+              value: #"http://<external-ip>:8000/hub/oauth_callback" 
+          image: "saurssaurav/jupyterhub-kube-oauth:latest"
+          imagePullPolicy: IfNotPresent
           name: jupyterhub
           ports: 
             - 
@@ -47,7 +47,7 @@ spec:
           terminationMessagePolicy: File
           volumeMounts: 
             - 
-              mountPath: /config/jupyterhub_config.py
+              mountPath: /srv/jupyterhub/jupyterhub_config.py
               name: jupyterhub-config
               subPath: jupyterhub_config.py
       dnsPolicy: ClusterFirst
